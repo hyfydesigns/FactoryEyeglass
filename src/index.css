@@ -14,8 +14,17 @@
   --white: #FFFFFF;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Prevent font size bump on iOS rotation */
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -23,25 +32,58 @@ body {
   color: var(--off-white);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garamond', serif;
+}
+
 a { text-decoration: none; color: inherit; }
 button { cursor: pointer; font-family: 'Montserrat', sans-serif; }
 
-.gold-line {
-  display: block;
-  width: 60px;
-  height: 1px;
-  background: var(--gold);
-  margin: 16px auto;
+/* Prevent 300ms tap delay on mobile */
+a, button { touch-action: manipulation; }
+
+/* Remove iOS input styling */
+input, select, textarea {
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 
 .section-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold);
+  display: block;
+}
+
+/* Mobile floating call button */
+.mobile-call-fab {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 90;
+  background: var(--gold);
+  color: var(--black);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(201,169,110,0.35);
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.mobile-call-fab:active {
+  transform: scale(0.93);
+}
+
+@media (max-width: 768px) {
+  .mobile-call-fab { display: flex; }
 }

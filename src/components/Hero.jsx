@@ -11,122 +11,93 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
+  const stats = [
+    { num: '30+', label: 'Years Experience' },
+    { num: '1000+', label: 'Designer Frames' },
+    { num: '3–5', label: 'Day Turnaround' },
+    { num: '2nd Gen', label: 'Optician' },
+  ];
+
   return (
     <section id="hero" style={{
-      minHeight: '100vh',
+      minHeight: '100dvh',
       background: 'var(--black)',
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
       position: 'relative', overflow: 'hidden',
-      padding: '0 24px',
+      padding: '80px 24px 0',
     }}>
-      {/* Background decorative circles */}
       <div style={{
         position: 'absolute', top: '20%', right: '-10%',
-        width: 600, height: 600,
-        borderRadius: '50%',
+        width: 600, height: 600, borderRadius: '50%',
         background: 'radial-gradient(circle, rgba(201,169,110,0.04) 0%, transparent 70%)',
         pointerEvents: 'none',
       }} />
-      <div style={{
-        position: 'absolute', bottom: '10%', left: '-5%',
-        width: 400, height: 400,
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(201,169,110,0.03) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-
-      {/* Vertical text - left side */}
-      <div style={{
-        position: 'absolute', left: 48, top: '50%',
-        transform: 'translateY(-50%) rotate(-90deg)',
-        transformOrigin: 'center center',
-        fontFamily: 'Montserrat, sans-serif',
-        fontSize: '0.55rem', fontWeight: 600,
-        letterSpacing: '0.3em', color: 'var(--mid-gray)',
-        textTransform: 'uppercase',
-        whiteSpace: 'nowrap',
-      }}>Houston, Texas · Est. 1988</div>
 
       {/* Main content */}
-      <div style={{ textAlign: 'center', maxWidth: 900, animation: 'fadeUp 1s ease forwards', opacity: 0 }}>
-        <p className="section-label" style={{ marginBottom: 24 }}>Alexander · Second Generation Optician</p>
+      <div style={{
+        textAlign: 'center', width: '100%', maxWidth: 860,
+        animation: 'fadeUp 1s ease forwards', opacity: 0,
+        padding: '0 4px',
+      }}>
+        <p className="section-label" style={{ marginBottom: 20, fontSize: '0.6rem' }}>
+          Alexander · Second Generation Optician
+        </p>
 
         <h1 style={{
           fontFamily: 'Cormorant Garamond, serif',
-          fontSize: 'clamp(3.5rem, 8vw, 7rem)',
-          fontWeight: 300,
-          lineHeight: 1.0,
-          letterSpacing: '-0.01em',
-          color: 'var(--off-white)',
-          marginBottom: 8,
-        }}>
-          Live Life
-        </h1>
+          fontSize: 'clamp(3rem, 12vw, 7rem)',
+          fontWeight: 300, lineHeight: 1.0,
+          color: 'var(--off-white)', marginBottom: 4,
+        }}>Live Life</h1>
+
         <h1 style={{
           fontFamily: 'Cormorant Garamond, serif',
-          fontSize: 'clamp(3.5rem, 8vw, 7rem)',
-          fontWeight: 300,
-          fontStyle: 'italic',
-          lineHeight: 1.0,
-          letterSpacing: '-0.01em',
-          color: 'var(--gold)',
-          marginBottom: 32,
-        }}>
-          in the Clear
-        </h1>
+          fontSize: 'clamp(3rem, 12vw, 7rem)',
+          fontWeight: 300, fontStyle: 'italic',
+          lineHeight: 1.0, color: 'var(--gold)', marginBottom: 28,
+        }}>in the Clear</h1>
 
-        {/* Animated line */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 40 }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 28 }}>
           <div ref={lineRef} style={{
             height: 1, width: 0,
             background: 'linear-gradient(90deg, transparent, var(--gold), transparent)',
-            transition: 'width 1.2s ease',
-            maxWidth: 400,
+            transition: 'width 1.2s ease', maxWidth: 340,
           }} />
         </div>
 
         <p style={{
           fontFamily: 'Montserrat, sans-serif',
-          fontSize: 'clamp(0.75rem, 1.5vw, 0.9rem)',
-          fontWeight: 300,
-          lineHeight: 1.9,
+          fontSize: 'clamp(0.78rem, 2.5vw, 0.9rem)',
+          fontWeight: 300, lineHeight: 1.85,
           color: 'var(--light-gray)',
-          maxWidth: 560, margin: '0 auto 48px',
-          letterSpacing: '0.05em',
+          maxWidth: 500, margin: '0 auto 36px',
+          letterSpacing: '0.03em',
         }}>
           Over three decades of expertise. Personalized fittings, high-end designer frames,
-          and innovative lenses tailored to your lifestyle — by Houston's trusted second-generation optician.
+          and innovative lenses tailored to your lifestyle.
         </p>
 
-        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
           <a href="#services" style={{
-            padding: '16px 40px',
-            background: 'var(--gold)',
-            color: 'var(--black)',
+            padding: '15px 32px',
+            background: 'var(--gold)', color: 'var(--black)',
             fontFamily: 'Montserrat, sans-serif',
             fontSize: '0.65rem', fontWeight: 700,
-            letterSpacing: '0.2em', textTransform: 'uppercase',
-            transition: 'all 0.3s',
-            display: 'inline-block',
-          }}
-          onMouseEnter={e => e.currentTarget.style.background = 'var(--gold-light)'}
-          onMouseLeave={e => e.currentTarget.style.background = 'var(--gold)'}
-          >Our Services</a>
-
+            letterSpacing: '0.18em', textTransform: 'uppercase',
+            textDecoration: 'none', display: 'inline-block',
+            minWidth: 160, textAlign: 'center',
+          }}>Our Services</a>
           <a href="tel:7134685665" style={{
-            padding: '16px 40px',
-            border: '1px solid rgba(201,169,110,0.4)',
+            padding: '15px 32px',
+            border: '1px solid rgba(201,169,110,0.5)',
             color: 'var(--off-white)',
             fontFamily: 'Montserrat, sans-serif',
             fontSize: '0.65rem', fontWeight: 600,
-            letterSpacing: '0.2em', textTransform: 'uppercase',
-            transition: 'all 0.3s',
-            display: 'inline-block',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--gold)'; e.currentTarget.style.color = 'var(--gold)'; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(201,169,110,0.4)'; e.currentTarget.style.color = 'var(--off-white)'; }}
-          >Book Appointment</a>
+            letterSpacing: '0.18em', textTransform: 'uppercase',
+            textDecoration: 'none', display: 'inline-block',
+            minWidth: 160, textAlign: 'center',
+          }}>Call Us Now</a>
         </div>
       </div>
 
@@ -134,45 +105,41 @@ export default function Hero() {
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0,
         borderTop: '1px solid rgba(201,169,110,0.1)',
-        display: 'flex', justifyContent: 'center', gap: 0,
-      }}>
-        {[
-          { num: '30+', label: 'Years Experience' },
-          { num: '1000+', label: 'Designer Frames' },
-          { num: '3–5', label: 'Day Turnaround' },
-          { num: '2nd', label: 'Generation Optician' },
-        ].map((s, i) => (
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+      }} className="hero-stats">
+        {stats.map((s, i) => (
           <div key={i} style={{
-            flex: 1, maxWidth: 220,
-            padding: '24px 16px',
+            padding: '18px 8px',
             textAlign: 'center',
             borderLeft: i > 0 ? '1px solid rgba(201,169,110,0.1)' : 'none',
           }}>
             <div style={{
               fontFamily: 'Cormorant Garamond, serif',
-              fontSize: '1.8rem', fontWeight: 400,
-              color: 'var(--gold)', lineHeight: 1,
+              fontSize: 'clamp(1.2rem, 4vw, 1.8rem)',
+              fontWeight: 400, color: 'var(--gold)', lineHeight: 1,
             }}>{s.num}</div>
             <div style={{
               fontFamily: 'Montserrat, sans-serif',
-              fontSize: '0.55rem', fontWeight: 600,
-              letterSpacing: '0.15em', textTransform: 'uppercase',
-              color: 'var(--mid-gray)', marginTop: 6,
+              fontSize: 'clamp(0.42rem, 1.2vw, 0.55rem)', fontWeight: 600,
+              letterSpacing: '0.1em', textTransform: 'uppercase',
+              color: 'var(--mid-gray)', marginTop: 5,
             }}>{s.label}</div>
           </div>
         ))}
       </div>
 
-      {/* Scroll indicator */}
-      <a href="#about" style={{
-        position: 'absolute', bottom: 110,
+      {/* Scroll cue — hidden on mobile since stats bar sits at bottom */}
+      <a href="#about" className="scroll-cue" style={{
+        position: 'absolute', bottom: 90,
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', gap: 6,
         color: 'var(--mid-gray)',
         animation: 'bounce 2s infinite',
+        textDecoration: 'none',
       }}>
-        <span style={{ fontSize: '0.55rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 600 }}>Scroll</span>
-        <ChevronDown size={14} />
+        <span style={{ fontSize: '0.5rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 600 }}>Scroll</span>
+        <ChevronDown size={13} />
       </a>
 
       <style>{`
@@ -184,8 +151,9 @@ export default function Hero() {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(6px); }
         }
-        @media (max-width: 768px) {
-          [style*="left: 48"] { display: none; }
+        @media (max-width: 520px) {
+          .hero-stats { grid-template-columns: repeat(2, 1fr) !important; }
+          .scroll-cue { display: none !important; }
         }
       `}</style>
     </section>

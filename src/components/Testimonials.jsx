@@ -1,42 +1,30 @@
 import { useState, useEffect, useRef } from 'react';
-import { Star } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const testimonials = [
   {
-    name: 'Maria G.',
-    location: 'Houston Heights',
-    stars: 5,
+    name: 'Maria G.', location: 'Houston Heights', stars: 5,
     text: 'Alex has been my optician for over 15 years. The Taylor Fit adjustment is unlike anything you get at a chain store — my glasses actually fit my face perfectly. I wouldn\'t trust anyone else.',
   },
   {
-    name: 'David R.',
-    location: 'Memorial, Houston',
-    stars: 5,
+    name: 'David R.', location: 'Memorial, Houston', stars: 5,
     text: 'Incredible selection of designer frames and Alex really knows his lenses. He recommended a progressive lens I\'d never heard of that\'s completely changed how I work at my computer. Real expertise.',
   },
   {
-    name: 'Sandra T.',
-    location: 'River Oaks',
-    stars: 5,
-    text: 'I needed my Tom Ford frames repaired urgently before a trip. Alex had them back to me in 2 days looking brand new. Fast, honest, and incredibly skilled. Factory Eyeglass is the best in Houston.',
+    name: 'Sandra T.', location: 'River Oaks', stars: 5,
+    text: 'I needed my Tom Ford frames repaired urgently before a trip. Alex had them back to me in 2 days looking brand new. Fast, honest, and incredibly skilled.',
   },
   {
-    name: 'James L.',
-    location: 'Katy, TX',
-    stars: 5,
-    text: 'Second generation optician and it shows. The knowledge Alex brings is on another level. He helped me find the lightest titanium frames I\'ve ever worn — I forget I have glasses on. Amazing service.',
+    name: 'James L.', location: 'Katy, TX', stars: 5,
+    text: 'Second generation optician and it shows. He helped me find the lightest titanium frames I\'ve ever worn — I forget I have glasses on. Amazing service.',
   },
   {
-    name: 'Patricia M.',
-    location: 'Tanglewood',
-    stars: 5,
-    text: 'My whole family has been coming here for years. Alex knows each of us by name and always remembers what we need. The personalized service you simply cannot find anywhere else in the city.',
+    name: 'Patricia M.', location: 'Tanglewood', stars: 5,
+    text: 'My whole family has been coming here for years. Alex knows each of us by name. The personalized service you simply cannot find anywhere else in the city.',
   },
   {
-    name: 'Carlos V.',
-    location: 'Energy Corridor',
-    stars: 5,
-    text: 'Needed an authorized dealer for my Prada frames and Factory Eyeglass was the only place that had exactly what I wanted. Alex\'s consultations are thorough and he genuinely cares about finding the right fit.',
+    name: 'Carlos V.', location: 'Energy Corridor', stars: 5,
+    text: 'Alex\'s consultations are thorough and he genuinely cares about finding the right fit. Best eyewear experience I\'ve had in Houston.',
   },
 ];
 
@@ -48,16 +36,16 @@ export default function Testimonials() {
   const goTo = (idx) => {
     if (animating) return;
     setAnimating(true);
-    setTimeout(() => {
-      setActive(idx);
-      setAnimating(false);
-    }, 300);
+    clearInterval(intervalRef.current);
+    setTimeout(() => { setActive(idx); setAnimating(false); }, 280);
+    intervalRef.current = setInterval(() => setActive(prev => (prev + 1) % testimonials.length), 5500);
   };
 
+  const prev = () => goTo((active - 1 + testimonials.length) % testimonials.length);
+  const next = () => goTo((active + 1) % testimonials.length);
+
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setActive(prev => (prev + 1) % testimonials.length);
-    }, 5000);
+    intervalRef.current = setInterval(() => setActive(prev => (prev + 1) % testimonials.length), 5500);
     return () => clearInterval(intervalRef.current);
   }, []);
 
@@ -66,121 +54,113 @@ export default function Testimonials() {
   return (
     <section id="testimonials" style={{
       background: 'var(--black)',
-      padding: '120px 48px',
-      position: 'relative',
-      overflow: 'hidden',
+      padding: 'clamp(64px, 10vw, 120px) clamp(20px, 5vw, 48px)',
+      position: 'relative', overflow: 'hidden',
     }}>
-      {/* Background quote mark */}
       <div style={{
-        position: 'absolute', top: '10%', left: '5%',
+        position: 'absolute', top: '5%', left: '2%',
         fontFamily: 'Cormorant Garamond, serif',
-        fontSize: '24rem', lineHeight: 1,
-        color: 'rgba(201,169,110,0.025)',
-        pointerEvents: 'none', userSelect: 'none',
-        fontWeight: 300,
+        fontSize: 'clamp(8rem, 25vw, 20rem)', lineHeight: 1,
+        color: 'rgba(201,169,110,0.02)',
+        pointerEvents: 'none', userSelect: 'none', fontWeight: 300,
       }}>"</div>
 
-      <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-        <p className="section-label" style={{ marginBottom: 16 }}>Client Stories</p>
-        <div style={{ width: 40, height: 1, background: 'var(--gold)', margin: '0 auto 16px' }} />
+      <div style={{ maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
+        <p className="section-label" style={{ marginBottom: 14 }}>Client Stories</p>
+        <div style={{ width: 40, height: 1, background: 'var(--gold)', margin: '0 auto 14px' }} />
         <h2 style={{
           fontFamily: 'Cormorant Garamond, serif',
-          fontSize: 'clamp(2rem, 4vw, 3rem)',
+          fontSize: 'clamp(1.8rem, 6vw, 3rem)',
           fontWeight: 300, lineHeight: 1.2,
-          color: 'var(--off-white)', marginBottom: 64,
+          color: 'var(--off-white)', marginBottom: 'clamp(32px, 6vw, 56px)',
         }}>
           Trusted by Houston Families<br />
           <em style={{ color: 'var(--gold)', fontStyle: 'italic' }}>for Over Three Decades</em>
         </h2>
 
-        {/* Testimonial card */}
+        {/* Card */}
         <div style={{
-          padding: '64px 72px',
+          padding: 'clamp(32px, 6vw, 60px) clamp(24px, 6vw, 64px)',
           border: '1px solid rgba(201,169,110,0.15)',
           position: 'relative',
-          opacity: animating ? 0 : 1,
-          transform: animating ? 'translateY(10px)' : 'translateY(0)',
-          transition: 'opacity 0.3s ease, transform 0.3s ease',
           background: 'rgba(201,169,110,0.02)',
-          marginBottom: 48,
-        }} className="testimonial-card">
-          {/* Corner accents */}
+          opacity: animating ? 0 : 1,
+          transform: animating ? 'translateY(8px)' : 'translateY(0)',
+          transition: 'opacity 0.28s ease, transform 0.28s ease',
+          marginBottom: 32,
+        }}>
           {[
-            { top: 0, left: 0, borderTop: '1px solid var(--gold)', borderLeft: '1px solid var(--gold)', width: 24, height: 24 },
-            { top: 0, right: 0, borderTop: '1px solid var(--gold)', borderRight: '1px solid var(--gold)', width: 24, height: 24 },
-            { bottom: 0, left: 0, borderBottom: '1px solid var(--gold)', borderLeft: '1px solid var(--gold)', width: 24, height: 24 },
-            { bottom: 0, right: 0, borderBottom: '1px solid var(--gold)', borderRight: '1px solid var(--gold)', width: 24, height: 24 },
+            { top: 0, left: 0, borderTop: '1px solid var(--gold)', borderLeft: '1px solid var(--gold)' },
+            { top: 0, right: 0, borderTop: '1px solid var(--gold)', borderRight: '1px solid var(--gold)' },
+            { bottom: 0, left: 0, borderBottom: '1px solid var(--gold)', borderLeft: '1px solid var(--gold)' },
+            { bottom: 0, right: 0, borderBottom: '1px solid var(--gold)', borderRight: '1px solid var(--gold)' },
           ].map((s, i) => (
-            <div key={i} style={{ position: 'absolute', ...s }} />
+            <div key={i} style={{ position: 'absolute', width: 20, height: 20, ...s }} />
           ))}
 
-          {/* Stars */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 4, marginBottom: 32 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 4, marginBottom: 24 }}>
             {Array.from({ length: t.stars }).map((_, i) => (
-              <Star key={i} size={14} fill="var(--gold)" color="var(--gold)" />
+              <Star key={i} size={13} fill="var(--gold)" color="var(--gold)" />
             ))}
           </div>
 
           <p style={{
             fontFamily: 'Cormorant Garamond, serif',
-            fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)',
+            fontSize: 'clamp(1.05rem, 3.5vw, 1.5rem)',
             fontWeight: 300, fontStyle: 'italic',
-            lineHeight: 1.7, color: 'var(--off-white)',
-            marginBottom: 40,
+            lineHeight: 1.7, color: 'var(--off-white)', marginBottom: 28,
           }}>"{t.text}"</p>
 
-          <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16,
-          }}>
-            <div style={{
-              width: 1, height: 20, background: 'rgba(201,169,110,0.3)',
-            }} />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+            <div style={{ width: 1, height: 16, background: 'rgba(201,169,110,0.3)' }} />
             <span style={{
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '0.7rem', fontWeight: 600,
-              letterSpacing: '0.1em', color: 'var(--off-white)',
+              fontFamily: 'Montserrat, sans-serif', fontSize: '0.68rem', fontWeight: 600,
+              color: 'var(--off-white)',
             }}>{t.name}</span>
-            <div style={{
-              width: 4, height: 4, borderRadius: '50%',
-              background: 'var(--gold)',
-            }} />
+            <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--gold)' }} />
             <span style={{
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '0.65rem', fontWeight: 400,
+              fontFamily: 'Montserrat, sans-serif', fontSize: '0.62rem',
               color: 'var(--mid-gray)',
             }}>{t.location}</span>
-            <div style={{
-              width: 1, height: 20, background: 'rgba(201,169,110,0.3)',
-            }} />
+            <div style={{ width: 1, height: 16, background: 'rgba(201,169,110,0.3)' }} />
           </div>
         </div>
 
-        {/* Dots */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              style={{
-                width: i === active ? 24 : 6,
-                height: 6,
-                border: 'none',
+        {/* Controls */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20 }}>
+          <button onClick={prev} style={{
+            background: 'none', border: '1px solid rgba(201,169,110,0.3)',
+            color: 'var(--gold)', width: 40, height: 40,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer', transition: 'all 0.2s',
+          }}
+          onTouchStart={e => e.currentTarget.style.background = 'rgba(201,169,110,0.1)'}
+          onTouchEnd={e => e.currentTarget.style.background = 'none'}
+          ><ChevronLeft size={16} /></button>
+
+          <div style={{ display: 'flex', gap: 8 }}>
+            {testimonials.map((_, i) => (
+              <button key={i} onClick={() => goTo(i)} style={{
+                width: i === active ? 22 : 6, height: 6, padding: 0,
+                border: 'none', borderRadius: 3,
                 background: i === active ? 'var(--gold)' : 'rgba(201,169,110,0.25)',
-                transition: 'all 0.3s ease',
-                borderRadius: 3,
-                padding: 0,
-              }}
-            />
-          ))}
+                transition: 'all 0.3s ease', cursor: 'pointer',
+                minWidth: 6,
+              }} />
+            ))}
+          </div>
+
+          <button onClick={next} style={{
+            background: 'none', border: '1px solid rgba(201,169,110,0.3)',
+            color: 'var(--gold)', width: 40, height: 40,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer', transition: 'all 0.2s',
+          }}
+          onTouchStart={e => e.currentTarget.style.background = 'rgba(201,169,110,0.1)'}
+          onTouchEnd={e => e.currentTarget.style.background = 'none'}
+          ><ChevronRight size={16} /></button>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 600px) {
-          .testimonial-card { padding: 40px 28px !important; }
-          section#testimonials { padding: 80px 24px !important; }
-        }
-      `}</style>
     </section>
   );
 }

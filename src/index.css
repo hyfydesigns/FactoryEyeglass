@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --gold: #C9A96E;
+  --gold-light: #E8D5A3;
+  --gold-dark: #8B6914;
+  --black: #0A0A0A;
+  --off-black: #111111;
+  --charcoal: #1C1C1C;
+  --dark-gray: #2A2A2A;
+  --mid-gray: #555555;
+  --light-gray: #AAAAAA;
+  --off-white: #F8F5F0;
+  --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--black);
+  color: var(--off-white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: 'Montserrat', sans-serif; }
+
+.gold-line {
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 16px auto;
+}
+
+.section-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+}

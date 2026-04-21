@@ -42,7 +42,7 @@ export default function Location() {
                       fontFamily: 'Montserrat, sans-serif',
                       fontSize: '0.52rem', fontWeight: 700,
                       letterSpacing: '0.18em', textTransform: 'uppercase',
-                      color: 'var(--mid-gray)', marginBottom: 5,
+                      color: 'var(--light-gray)', marginBottom: 5,
                     }}>{item.label}</div>
                     {item.hours ? (
                       <div>
@@ -56,7 +56,7 @@ export default function Location() {
                             fontFamily: 'Montserrat, sans-serif',
                             fontSize: 'clamp(0.68rem, 2vw, 0.76rem)',
                             marginBottom: 3,
-                            color: h.hours === 'Closed' ? 'var(--mid-gray)' : 'var(--off-white)',
+                            color: h.hours === 'Closed' ? 'var(--light-gray)' : 'var(--off-white)',
                           }}>
                             <span style={{ fontWeight: 500, minWidth: 70 }}>{h.day}</span>
                             <span style={{ fontWeight: 300, color: 'var(--light-gray)' }}>{h.hours}</span>

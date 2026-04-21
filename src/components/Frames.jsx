@@ -46,7 +46,7 @@ export default function Frames() {
                   fontFamily: 'Montserrat, sans-serif',
                   fontSize: '0.6rem', fontWeight: 600,
                   letterSpacing: '0.12em', textTransform: 'uppercase',
-                  color: i === 0 ? 'var(--gold)' : 'var(--mid-gray)',
+                  color: i === 0 ? 'var(--gold)' : 'var(--light-gray)',
                   cursor: 'default',
                 }}>{cat}</span>
               ))}
@@ -111,7 +111,7 @@ export default function Frames() {
                 <span key={i} style={{
                   fontFamily: 'Cormorant Garamond, serif',
                   fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: 400,
-                  color: 'var(--mid-gray)',
+                  color: 'var(--light-gray)',
                   padding: 'clamp(12px, 2vw, 18px) clamp(20px, 4vw, 36px)',
                   borderRight: '1px solid rgba(201,169,110,0.08)',
                   letterSpacing: '0.04em',

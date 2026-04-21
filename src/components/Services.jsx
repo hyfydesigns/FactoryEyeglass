@@ -130,7 +130,7 @@ export default function Services() {
               {/* Mobile tap indicator */}
               <div className="tap-hint" style={{
                 fontFamily: 'Montserrat, sans-serif',
-                fontSize: '0.55rem', color: 'var(--mid-gray)',
+                fontSize: '0.55rem', color: 'var(--light-gray)',
                 letterSpacing: '0.1em', textTransform: 'uppercase',
                 display: active === s.id ? 'none' : 'block',
               }}>Tap for details ↓</div>

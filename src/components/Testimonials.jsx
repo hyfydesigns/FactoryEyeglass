@@ -120,7 +120,7 @@ export default function Testimonials() {
             <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--gold)' }} />
             <span style={{
               fontFamily: 'Montserrat, sans-serif', fontSize: '0.62rem',
-              color: 'var(--mid-gray)',
+              color: 'var(--light-gray)',
             }}>{t.location}</span>
             <div style={{ width: 1, height: 16, background: 'rgba(201,169,110,0.3)' }} />
           </div>

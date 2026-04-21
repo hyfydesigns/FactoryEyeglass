@@ -27,7 +27,6 @@ export default function Hero() {
       position: 'relative',
       overflow: 'hidden',
     }}>
-      {/* Decorative glow */}
       <div style={{
         position: 'absolute', top: '20%', right: '-10%',
         width: 600, height: 600, borderRadius: '50%',
@@ -35,7 +34,7 @@ export default function Hero() {
         pointerEvents: 'none',
       }} />
 
-      {/* Main content — grows to fill available space */}
+      {/* Main content */}
       <div style={{
         flex: 1,
         display: 'flex',
@@ -108,11 +107,10 @@ export default function Hero() {
             }}>Call Us Now</a>
           </div>
 
-          {/* Scroll cue */}
           <a href="#about" className="scroll-cue" style={{
             display: 'inline-flex', flexDirection: 'column',
             alignItems: 'center', gap: 6,
-            color: 'var(--mid-gray)',
+            color: 'var(--light-gray)',
             animation: 'bounce 2s infinite 1.5s',
             textDecoration: 'none',
             marginTop: 48,
@@ -123,7 +121,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Stats bar — sits at the bottom in normal flow, never overlaps */}
+      {/* Stats bar */}
       <div style={{
         borderTop: '1px solid rgba(201,169,110,0.1)',
         display: 'grid',
@@ -143,9 +141,9 @@ export default function Hero() {
             }}>{s.num}</div>
             <div style={{
               fontFamily: 'Montserrat, sans-serif',
-              fontSize: 'clamp(0.42rem, 1.2vw, 0.55rem)', fontWeight: 600,
+              fontSize: 'clamp(0.48rem, 1.4vw, 0.58rem)', fontWeight: 600,
               letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: 'var(--mid-gray)', marginTop: 5,
+              color: 'var(--light-gray)', marginTop: 5,
             }}>{s.label}</div>
           </div>
         ))}

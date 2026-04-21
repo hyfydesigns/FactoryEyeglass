@@ -31,7 +31,7 @@ export default function Footer() {
           <p style={{
             fontFamily: 'Montserrat, sans-serif',
             fontSize: '0.72rem', fontWeight: 300,
-            lineHeight: 1.85, color: 'var(--mid-gray)',
+            lineHeight: 1.85, color: 'var(--light-gray)',
             maxWidth: 260, marginBottom: 24,
           }}>Houston's trusted second-generation optician. Personalized service and the finest eyewear since 1988.</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -45,10 +45,10 @@ export default function Footer() {
                 {item.href ? (
                   <a href={item.href} style={{
                     fontFamily: 'Montserrat, sans-serif', fontSize: '0.68rem',
-                    color: 'var(--mid-gray)', textDecoration: 'none',
+                    color: 'var(--light-gray)', textDecoration: 'none',
                   }}>{item.text}</a>
                 ) : (
-                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '0.68rem', color: 'var(--mid-gray)' }}>{item.text}</span>
+                  <span style={{ fontFamily: 'Montserrat, sans-serif', fontSize: '0.68rem', color: 'var(--light-gray)' }}>{item.text}</span>
                 )}
               </div>
             ))}
@@ -66,10 +66,10 @@ export default function Footer() {
             {['Taylor Fit™ Adjustments', 'Lens Consultation', 'Designer Frames', 'Sunglasses', 'Contact Lenses', 'Repair Services'].map((l, i) => (
               <a key={i} href="#services" style={{
                 fontFamily: 'Montserrat, sans-serif', fontSize: '0.68rem', fontWeight: 300,
-                color: 'var(--mid-gray)', textDecoration: 'none', lineHeight: 1.4,
+                color: 'var(--light-gray)', textDecoration: 'none', lineHeight: 1.4,
               }}
               onMouseEnter={e => e.target.style.color = 'var(--gold)'}
-              onMouseLeave={e => e.target.style.color = 'var(--mid-gray)'}
+              onMouseLeave={e => e.target.style.color = 'var(--light-gray)'}
               >{l}</a>
             ))}
           </div>
@@ -86,10 +86,10 @@ export default function Footer() {
             {['Tom Ford', 'Prada', 'Gucci', 'Ray-Ban', 'Versace', 'Silhouette', 'Dior', 'Burberry'].map((b, i) => (
               <a key={i} href="#frames" style={{
                 fontFamily: 'Montserrat, sans-serif', fontSize: '0.68rem', fontWeight: 300,
-                color: 'var(--mid-gray)', textDecoration: 'none',
+                color: 'var(--light-gray)', textDecoration: 'none',
               }}
               onMouseEnter={e => e.target.style.color = 'var(--gold)'}
-              onMouseLeave={e => e.target.style.color = 'var(--mid-gray)'}
+              onMouseLeave={e => e.target.style.color = 'var(--light-gray)'}
               >{b}</a>
             ))}
             <a href="#frames" style={{
@@ -108,7 +108,7 @@ export default function Footer() {
           }}>Book Appointment</h4>
           <p style={{
             fontFamily: 'Montserrat, sans-serif', fontSize: '0.7rem', fontWeight: 300,
-            lineHeight: 1.8, color: 'var(--mid-gray)', marginBottom: 20,
+            lineHeight: 1.8, color: 'var(--light-gray)', marginBottom: 20,
           }}>Schedule your personal consultation with Alexander today.</p>
           <a href="#contact" style={{
             display: 'block', padding: '13px 20px',
@@ -119,7 +119,7 @@ export default function Footer() {
           }}>Book Consultation</a>
           <a href="tel:7134685665" style={{
             display: 'block', padding: '13px 20px',
-            border: '1px solid rgba(201,169,110,0.3)', color: 'var(--mid-gray)',
+            border: '1px solid rgba(201,169,110,0.3)', color: 'var(--light-gray)',
             fontFamily: 'Montserrat, sans-serif', fontSize: '0.62rem', fontWeight: 600,
             letterSpacing: '0.18em', textTransform: 'uppercase',
             textAlign: 'center', textDecoration: 'none',
@@ -139,17 +139,17 @@ export default function Footer() {
         }}>
           <span style={{
             fontFamily: 'Montserrat, sans-serif', fontSize: '0.58rem',
-            color: 'var(--mid-gray)',
+            color: 'var(--light-gray)',
           }}>© {year} Factory Eyeglass Outlet. All rights reserved.</span>
           <div className="footer-nav" style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
             {['About', 'Services', 'Frames', 'Insurance', 'Location', 'Contact'].map((l, i) => (
               <a key={i} href={`#${l.toLowerCase()}`} style={{
                 fontFamily: 'Montserrat, sans-serif', fontSize: '0.56rem', fontWeight: 500,
                 letterSpacing: '0.1em', textTransform: 'uppercase',
-                color: 'var(--mid-gray)', textDecoration: 'none',
+                color: 'var(--light-gray)', textDecoration: 'none',
               }}
               onMouseEnter={e => e.target.style.color = 'var(--gold)'}
-              onMouseLeave={e => e.target.style.color = 'var(--mid-gray)'}
+              onMouseLeave={e => e.target.style.color = 'var(--light-gray)'}
               >{l}</a>
             ))}
           </div>

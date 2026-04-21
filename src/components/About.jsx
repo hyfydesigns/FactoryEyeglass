@@ -79,7 +79,7 @@ export default function About() {
                   }}>{c.value}</div>
                   <div style={{
                     fontSize: '0.58rem', letterSpacing: '0.12em',
-                    textTransform: 'uppercase', color: 'var(--mid-gray)',
+                    textTransform: 'uppercase', color: 'var(--light-gray)',
                     marginTop: 3, fontWeight: 600,
                   }}>{c.label}</div>
                 </div>

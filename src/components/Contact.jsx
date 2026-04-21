@@ -62,7 +62,7 @@ export default function Contact() {
                       fontFamily: 'Montserrat, sans-serif',
                       fontSize: '0.52rem', fontWeight: 700,
                       letterSpacing: '0.18em', textTransform: 'uppercase',
-                      color: 'var(--mid-gray)', marginBottom: 3,
+                      color: 'var(--light-gray)', marginBottom: 3,
                     }}>{item.label}</div>
                     {item.href ? (
                       <a href={item.href} style={{
@@ -135,7 +135,7 @@ export default function Contact() {
                   fontFamily: 'Montserrat, sans-serif',
                   fontSize: '0.57rem', fontWeight: 700,
                   letterSpacing: '0.14em', textTransform: 'uppercase',
-                  color: 'var(--mid-gray)', marginBottom: 6,
+                  color: 'var(--light-gray)', marginBottom: 6,
                 }}>{field.label}</label>
                 <input type={field.type} placeholder={field.placeholder} style={{
                   width: '100%', padding: '13px 14px',
@@ -159,7 +159,7 @@ export default function Contact() {
                 fontFamily: 'Montserrat, sans-serif',
                 fontSize: '0.57rem', fontWeight: 700,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
-                color: 'var(--mid-gray)', marginBottom: 6,
+                color: 'var(--light-gray)', marginBottom: 6,
               }}>Service Needed</label>
               <select style={{
                 width: '100%', padding: '13px 14px',
@@ -200,7 +200,7 @@ export default function Contact() {
             <p style={{
               textAlign: 'center',
               fontFamily: 'Montserrat, sans-serif',
-              fontSize: '0.62rem', color: 'var(--mid-gray)',
+              fontSize: '0.62rem', color: 'var(--light-gray)',
               marginTop: 14,
             }}>Or call: <a href="tel:7134685665" style={{ color: 'var(--gold)', textDecoration: 'none' }}>(713) 468-5665</a></p>
           </div>

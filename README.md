@@ -1,16 +1,43 @@
-# React + Vite
+# Factory Eyeglass Outlet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern React website for Factory Eyeglass Outlet — Houston's premier second-generation optician since 1988.
 
-Currently, two official plugins are available:
+## 🚀 Live Site
+Deployed at: https://factoryeyeglassoutlet.com
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠 Tech Stack
+- **React** (Vite)
+- **Lucide React** (icons)
+- **Vercel** (hosting)
+- Fonts: Cormorant Garamond + Montserrat
 
-## React Compiler
+## 📄 Sections
+1. **Hero** — Full-screen with animated stats
+2. **About Alex** — Second-gen optician story & credentials
+3. **Services** — Taylor Fit™, lenses, frames, sunglasses, contacts, repair
+4. **Frames & Brands** — Collection highlights + brand marquee
+5. **Testimonials** — Auto-rotating client reviews
+6. **Vision Plans** — Insurance accepted
+7. **Location** — Address, hours, Google Maps embed
+8. **Contact** — Appointment request form
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 💻 Local Development
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+## 🏗 Build
+```bash
+npm run build
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🌐 Deploy to Vercel
+1. Connect this GitHub repo to Vercel
+2. Framework: **Vite** (auto-detected)
+3. Build: `npm run build` → Output: `dist`
+4. Add domain: `factoryeyeglassoutlet.com`
+
+## 📍 Contact
+7921 Katy Fwy, Houston, TX 77024  
+(713) 468-5665 · alex@factoryeyeglassoutlet.com

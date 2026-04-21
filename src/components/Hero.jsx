@@ -22,11 +22,12 @@ export default function Hero() {
     <section id="hero" style={{
       minHeight: '100dvh',
       background: 'var(--black)',
-      display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center',
-      position: 'relative', overflow: 'hidden',
-      padding: '80px 24px 0',
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
+      {/* Decorative glow */}
       <div style={{
         position: 'absolute', top: '20%', right: '-10%',
         width: 600, height: 600, borderRadius: '50%',
@@ -34,83 +35,104 @@ export default function Hero() {
         pointerEvents: 'none',
       }} />
 
-      {/* Main content */}
+      {/* Main content — grows to fill available space */}
       <div style={{
-        textAlign: 'center', width: '100%', maxWidth: 860,
-        animation: 'fadeUp 1s ease forwards', opacity: 0,
-        padding: '0 4px',
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 'clamp(100px, 14vw, 140px) 24px clamp(32px, 5vw, 48px)',
       }}>
-        <p className="section-label" style={{ marginBottom: 20, fontSize: '0.6rem' }}>
-          Alexander · Second Generation Optician
-        </p>
-
-        <h1 style={{
-          fontFamily: 'Cormorant Garamond, serif',
-          fontSize: 'clamp(3rem, 12vw, 7rem)',
-          fontWeight: 300, lineHeight: 1.0,
-          color: 'var(--off-white)', marginBottom: 4,
-        }}>Live Life</h1>
-
-        <h1 style={{
-          fontFamily: 'Cormorant Garamond, serif',
-          fontSize: 'clamp(3rem, 12vw, 7rem)',
-          fontWeight: 300, fontStyle: 'italic',
-          lineHeight: 1.0, color: 'var(--gold)', marginBottom: 28,
-        }}>in the Clear</h1>
-
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 28 }}>
-          <div ref={lineRef} style={{
-            height: 1, width: 0,
-            background: 'linear-gradient(90deg, transparent, var(--gold), transparent)',
-            transition: 'width 1.2s ease', maxWidth: 340,
-          }} />
-        </div>
-
-        <p style={{
-          fontFamily: 'Montserrat, sans-serif',
-          fontSize: 'clamp(0.78rem, 2.5vw, 0.9rem)',
-          fontWeight: 300, lineHeight: 1.85,
-          color: 'var(--light-gray)',
-          maxWidth: 500, margin: '0 auto 36px',
-          letterSpacing: '0.03em',
+        <div style={{
+          textAlign: 'center', width: '100%', maxWidth: 860,
+          animation: 'fadeUp 1s ease forwards', opacity: 0,
+          padding: '0 4px',
         }}>
-          Over three decades of expertise. Personalized fittings, high-end designer frames,
-          and innovative lenses tailored to your lifestyle.
-        </p>
+          <p className="section-label" style={{ marginBottom: 20, fontSize: '0.6rem' }}>
+            Alexander · Second Generation Optician
+          </p>
 
-        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="#services" style={{
-            padding: '15px 32px',
-            background: 'var(--gold)', color: 'var(--black)',
+          <h1 style={{
+            fontFamily: 'Cormorant Garamond, serif',
+            fontSize: 'clamp(3rem, 12vw, 7rem)',
+            fontWeight: 300, lineHeight: 1.0,
+            color: 'var(--off-white)', marginBottom: 4,
+          }}>Live Life</h1>
+
+          <h1 style={{
+            fontFamily: 'Cormorant Garamond, serif',
+            fontSize: 'clamp(3rem, 12vw, 7rem)',
+            fontWeight: 300, fontStyle: 'italic',
+            lineHeight: 1.0, color: 'var(--gold)', marginBottom: 28,
+          }}>in the Clear</h1>
+
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 28 }}>
+            <div ref={lineRef} style={{
+              height: 1, width: 0,
+              background: 'linear-gradient(90deg, transparent, var(--gold), transparent)',
+              transition: 'width 1.2s ease', maxWidth: 340,
+            }} />
+          </div>
+
+          <p style={{
             fontFamily: 'Montserrat, sans-serif',
-            fontSize: '0.65rem', fontWeight: 700,
-            letterSpacing: '0.18em', textTransform: 'uppercase',
-            textDecoration: 'none', display: 'inline-block',
-            minWidth: 160, textAlign: 'center',
-          }}>Our Services</a>
-          <a href="tel:7134685665" style={{
-            padding: '15px 32px',
-            border: '1px solid rgba(201,169,110,0.5)',
-            color: 'var(--off-white)',
-            fontFamily: 'Montserrat, sans-serif',
-            fontSize: '0.65rem', fontWeight: 600,
-            letterSpacing: '0.18em', textTransform: 'uppercase',
-            textDecoration: 'none', display: 'inline-block',
-            minWidth: 160, textAlign: 'center',
-          }}>Call Us Now</a>
+            fontSize: 'clamp(0.78rem, 2.5vw, 0.9rem)',
+            fontWeight: 300, lineHeight: 1.85,
+            color: 'var(--light-gray)',
+            maxWidth: 500, margin: '0 auto 36px',
+            letterSpacing: '0.03em',
+          }}>
+            Over three decades of expertise. Personalized fittings, high-end designer frames,
+            and innovative lenses tailored to your lifestyle.
+          </p>
+
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="#services" style={{
+              padding: '15px 32px',
+              background: 'var(--gold)', color: 'var(--black)',
+              fontFamily: 'Montserrat, sans-serif',
+              fontSize: '0.65rem', fontWeight: 700,
+              letterSpacing: '0.18em', textTransform: 'uppercase',
+              textDecoration: 'none', display: 'inline-block',
+              minWidth: 160, textAlign: 'center',
+            }}>Our Services</a>
+            <a href="tel:7134685665" style={{
+              padding: '15px 32px',
+              border: '1px solid rgba(201,169,110,0.5)',
+              color: 'var(--off-white)',
+              fontFamily: 'Montserrat, sans-serif',
+              fontSize: '0.65rem', fontWeight: 600,
+              letterSpacing: '0.18em', textTransform: 'uppercase',
+              textDecoration: 'none', display: 'inline-block',
+              minWidth: 160, textAlign: 'center',
+            }}>Call Us Now</a>
+          </div>
+
+          {/* Scroll cue */}
+          <a href="#about" className="scroll-cue" style={{
+            display: 'inline-flex', flexDirection: 'column',
+            alignItems: 'center', gap: 6,
+            color: 'var(--mid-gray)',
+            animation: 'bounce 2s infinite 1.5s',
+            textDecoration: 'none',
+            marginTop: 48,
+          }}>
+            <span style={{ fontSize: '0.5rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 600 }}>Scroll</span>
+            <ChevronDown size={13} />
+          </a>
         </div>
       </div>
 
-      {/* Stats bar */}
+      {/* Stats bar — sits at the bottom in normal flow, never overlaps */}
       <div style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0,
         borderTop: '1px solid rgba(201,169,110,0.1)',
         display: 'grid',
         gridTemplateColumns: 'repeat(4, 1fr)',
+        flexShrink: 0,
       }} className="hero-stats">
         {stats.map((s, i) => (
           <div key={i} style={{
-            padding: '18px 8px',
+            padding: 'clamp(14px, 3vw, 22px) 8px',
             textAlign: 'center',
             borderLeft: i > 0 ? '1px solid rgba(201,169,110,0.1)' : 'none',
           }}>
@@ -128,19 +150,6 @@ export default function Hero() {
           </div>
         ))}
       </div>
-
-      {/* Scroll cue — hidden on mobile since stats bar sits at bottom */}
-      <a href="#about" className="scroll-cue" style={{
-        position: 'absolute', bottom: 90,
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', gap: 6,
-        color: 'var(--mid-gray)',
-        animation: 'bounce 2s infinite',
-        textDecoration: 'none',
-      }}>
-        <span style={{ fontSize: '0.5rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 600 }}>Scroll</span>
-        <ChevronDown size={13} />
-      </a>
 
       <style>{`
         @keyframes fadeUp {

@@ -139,7 +139,7 @@ export default function Contact() {
                 }}>{field.label}</label>
                 <input type={field.type} placeholder={field.placeholder} style={{
                   width: '100%', padding: '13px 14px',
-                  background: 'rgba(255,255,255,0.03)',
+                  background: 'var(--input-bg)',
                   border: '1px solid rgba(201,169,110,0.2)',
                   color: 'var(--off-white)',
                   fontFamily: 'Montserrat, sans-serif',

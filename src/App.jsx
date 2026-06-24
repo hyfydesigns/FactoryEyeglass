@@ -26,7 +26,7 @@ function ScrollToTop() {
         position: 'fixed', bottom: 32, left: 20, zIndex: 90,
         width: 44, height: 44,
         border: '1px solid var(--gold)',
-        background: 'rgba(10,10,10,0.92)',
+        background: 'var(--scroll-btn-bg)',
         color: 'var(--gold)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         cursor: 'pointer', fontSize: '1rem',

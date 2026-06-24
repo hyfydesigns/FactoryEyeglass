@@ -12,6 +12,23 @@
   --light-gray: #BBBBBB;
   --off-white: #F8F5F0;
   --white: #FFFFFF;
+  --nav-bg-scrolled: rgba(10,10,10,0.97);
+  --scroll-btn-bg: rgba(10,10,10,0.92);
+  --input-bg: rgba(255,255,255,0.03);
+}
+
+[data-theme="light"] {
+  --black: #F8F5F0;
+  --off-black: #EDE8E2;
+  --charcoal: #E2DDD7;
+  --dark-gray: #D5D0CA;
+  --mid-gray: #777777;
+  --light-gray: #4A4A4A;
+  --off-white: #1A1A1A;
+  --white: #0A0A0A;
+  --nav-bg-scrolled: rgba(248,245,240,0.97);
+  --scroll-btn-bg: rgba(248,245,240,0.92);
+  --input-bg: rgba(0,0,0,0.04);
 }
 
 *, *::before, *::after {

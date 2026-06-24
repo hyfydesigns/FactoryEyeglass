@@ -1,9 +1,22 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, Sun, Moon } from 'lucide-react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'dark';
+    }
+    return 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -29,7 +42,7 @@ export default function Navbar() {
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         padding: scrolled ? '12px 24px' : '20px 24px',
-        background: scrolled ? 'rgba(10,10,10,0.97)' : 'transparent',
+        background: scrolled ? 'var(--nav-bg-scrolled)' : 'transparent',
         borderBottom: scrolled ? '1px solid rgba(201,169,110,0.15)' : 'none',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         transition: 'all 0.4s ease',
@@ -64,6 +77,16 @@ export default function Navbar() {
             onMouseLeave={e => e.target.style.color = 'var(--light-gray)'}
             >{l.label}</a>
           ))}
+          <button onClick={toggleTheme} aria-label="Toggle theme" style={{
+            background: 'none', border: '1px solid rgba(201,169,110,0.3)',
+            color: 'var(--gold)', width: 36, height: 36,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer', transition: 'border-color 0.3s',
+            flexShrink: 0,
+          }}
+          onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--gold)'}
+          onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(201,169,110,0.3)'}
+          >{theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}</button>
           <a href="tel:7134685665" style={{
             display: 'flex', alignItems: 'center', gap: 8,
             padding: '10px 18px',
@@ -79,8 +102,14 @@ export default function Navbar() {
           ><Phone size={11} /> (713) 468-5665</a>
         </div>
 
-        {/* Mobile: call + hamburger */}
-        <div style={{ display: 'none', alignItems: 'center', gap: 12 }} className="nav-mobile-btns">
+        {/* Mobile: theme toggle + call + hamburger */}
+        <div style={{ display: 'none', alignItems: 'center', gap: 10 }} className="nav-mobile-btns">
+          <button onClick={toggleTheme} aria-label="Toggle theme" style={{
+            background: 'none', border: '1px solid rgba(201,169,110,0.4)',
+            color: 'var(--gold)', width: 38, height: 38,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer',
+          }}>{theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}</button>
           <a href="tel:7134685665" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             width: 38, height: 38,

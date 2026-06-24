@@ -1,14 +1,27 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+
+const BG_IMAGES = [
+  'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1920&q=80',
+  'https://images.unsplash.com/photo-1556306510-31ca015374b0?auto=format&fit=crop&w=1920&q=80',
+  'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=1920&q=80',
+  'https://images.unsplash.com/photo-1517948430535-1e2469d314fe?auto=format&fit=crop&w=1920&q=80',
+];
 
 export default function Hero() {
   const lineRef = useRef(null);
+  const [slide, setSlide] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (lineRef.current) lineRef.current.style.width = '100%';
     }, 600);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => setSlide(s => (s + 1) % BG_IMAGES.length), 5000);
+    return () => clearInterval(id);
   }, []);
 
   const stats = [
@@ -27,12 +40,53 @@ export default function Hero() {
       position: 'relative',
       overflow: 'hidden',
     }}>
+      {/* Background slideshow */}
+      {BG_IMAGES.map((src, i) => (
+        <div key={src} style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: `url(${src})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: slide === i ? 1 : 0,
+          transition: 'opacity 1.4s ease',
+          transform: slide === i ? 'scale(1.04)' : 'scale(1)',
+          transitionProperty: 'opacity, transform',
+          transitionDuration: slide === i ? '1.4s, 8s' : '1.4s, 0s',
+          transitionTimingFunction: 'ease, ease-out',
+          pointerEvents: 'none',
+          willChange: 'opacity, transform',
+        }} />
+      ))}
+
+      {/* Dark overlay — keeps text readable over any photo */}
       <div style={{
-        position: 'absolute', top: '20%', right: '-10%',
-        width: 600, height: 600, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(201,169,110,0.04) 0%, transparent 70%)',
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.72) 100%)',
         pointerEvents: 'none',
+        zIndex: 1,
       }} />
+
+      {/* Slide dots */}
+      <div style={{
+        position: 'absolute', bottom: 80, left: '50%', transform: 'translateX(-50%)',
+        display: 'flex', gap: 8, zIndex: 3,
+      }} className="slide-dots">
+        {BG_IMAGES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setSlide(i)}
+            aria-label={`Go to slide ${i + 1}`}
+            style={{
+              width: slide === i ? 24 : 6,
+              height: 6,
+              border: 'none',
+              background: slide === i ? 'var(--gold)' : 'rgba(255,255,255,0.4)',
+              cursor: 'pointer', padding: 0,
+              transition: 'all 0.4s ease',
+            }}
+          />
+        ))}
+      </div>
 
       {/* Main content */}
       <div style={{
@@ -41,6 +95,7 @@ export default function Hero() {
         alignItems: 'center',
         justifyContent: 'center',
         padding: 'clamp(100px, 14vw, 140px) 24px clamp(32px, 5vw, 48px)',
+        position: 'relative', zIndex: 2,
       }}>
         <div style={{
           textAlign: 'center', width: '100%', maxWidth: 860,
@@ -55,7 +110,8 @@ export default function Hero() {
             fontFamily: 'Cormorant Garamond, serif',
             fontSize: 'clamp(3rem, 12vw, 7rem)',
             fontWeight: 300, lineHeight: 1.0,
-            color: 'var(--off-white)', marginBottom: 4,
+            color: '#F8F5F0', marginBottom: 4,
+            textShadow: '0 2px 20px rgba(0,0,0,0.4)',
           }}>Live Life</h1>
 
           <h1 style={{
@@ -63,6 +119,7 @@ export default function Hero() {
             fontSize: 'clamp(3rem, 12vw, 7rem)',
             fontWeight: 300, fontStyle: 'italic',
             lineHeight: 1.0, color: 'var(--gold)', marginBottom: 28,
+            textShadow: '0 2px 20px rgba(0,0,0,0.4)',
           }}>in the Clear</h1>
 
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 28 }}>
@@ -77,9 +134,10 @@ export default function Hero() {
             fontFamily: 'Montserrat, sans-serif',
             fontSize: 'clamp(0.78rem, 2.5vw, 0.9rem)',
             fontWeight: 300, lineHeight: 1.85,
-            color: 'var(--light-gray)',
+            color: 'rgba(248,245,240,0.88)',
             maxWidth: 500, margin: '0 auto 36px',
             letterSpacing: '0.03em',
+            textShadow: '0 1px 8px rgba(0,0,0,0.5)',
           }}>
             Over three decades of expertise. Personalized fittings, high-end designer frames,
             and innovative lenses tailored to your lifestyle.
@@ -88,7 +146,7 @@ export default function Hero() {
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="#services" style={{
               padding: '15px 32px',
-              background: 'var(--gold)', color: 'var(--black)',
+              background: 'var(--gold)', color: '#0A0A0A',
               fontFamily: 'Montserrat, sans-serif',
               fontSize: '0.65rem', fontWeight: 700,
               letterSpacing: '0.18em', textTransform: 'uppercase',
@@ -97,20 +155,21 @@ export default function Hero() {
             }}>Our Services</a>
             <a href="tel:7134685665" style={{
               padding: '15px 32px',
-              border: '1px solid rgba(201,169,110,0.5)',
-              color: 'var(--off-white)',
+              border: '1px solid rgba(201,169,110,0.6)',
+              color: '#F8F5F0',
               fontFamily: 'Montserrat, sans-serif',
               fontSize: '0.65rem', fontWeight: 600,
               letterSpacing: '0.18em', textTransform: 'uppercase',
               textDecoration: 'none', display: 'inline-block',
               minWidth: 160, textAlign: 'center',
+              backdropFilter: 'blur(4px)',
             }}>Call Us Now</a>
           </div>
 
           <a href="#about" className="scroll-cue" style={{
             display: 'inline-flex', flexDirection: 'column',
             alignItems: 'center', gap: 6,
-            color: 'var(--light-gray)',
+            color: 'rgba(248,245,240,0.7)',
             animation: 'bounce 2s infinite 1.5s',
             textDecoration: 'none',
             marginTop: 48,
@@ -123,16 +182,20 @@ export default function Hero() {
 
       {/* Stats bar */}
       <div style={{
-        borderTop: '1px solid rgba(201,169,110,0.1)',
+        borderTop: '1px solid rgba(201,169,110,0.2)',
         display: 'grid',
         gridTemplateColumns: 'repeat(4, 1fr)',
         flexShrink: 0,
+        position: 'relative', zIndex: 2,
+        background: 'rgba(0,0,0,0.5)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
       }} className="hero-stats">
         {stats.map((s, i) => (
           <div key={i} style={{
             padding: 'clamp(14px, 3vw, 22px) 8px',
             textAlign: 'center',
-            borderLeft: i > 0 ? '1px solid rgba(201,169,110,0.1)' : 'none',
+            borderLeft: i > 0 ? '1px solid rgba(201,169,110,0.15)' : 'none',
           }}>
             <div style={{
               fontFamily: 'Cormorant Garamond, serif',
@@ -143,7 +206,7 @@ export default function Hero() {
               fontFamily: 'Montserrat, sans-serif',
               fontSize: 'clamp(0.48rem, 1.4vw, 0.58rem)', fontWeight: 600,
               letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: 'var(--light-gray)', marginTop: 5,
+              color: 'rgba(248,245,240,0.65)', marginTop: 5,
             }}>{s.label}</div>
           </div>
         ))}
@@ -161,6 +224,7 @@ export default function Hero() {
         @media (max-width: 520px) {
           .hero-stats { grid-template-columns: repeat(2, 1fr) !important; }
           .scroll-cue { display: none !important; }
+          .slide-dots { bottom: 64px !important; }
         }
       `}</style>
     </section>

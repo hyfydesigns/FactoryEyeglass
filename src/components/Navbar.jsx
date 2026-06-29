@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Sun, Moon } from 'lucide-react';
+import { useSanity } from '../hooks/useSanity';
+
+const BIZ_QUERY = `*[_type == "businessInfo"][0] { phone, phoneDisplay }`;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -17,6 +20,10 @@ export default function Navbar() {
   }, [theme]);
 
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
+
+  const { data: biz } = useSanity(BIZ_QUERY);
+  const phone = biz?.phone || '7134685665';
+  const phoneDisplay = biz?.phoneDisplay || '{phoneDisplay}';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -87,7 +94,7 @@ export default function Navbar() {
           onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--gold)'}
           onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(201,169,110,0.3)'}
           >{theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}</button>
-          <a href="tel:7134685665" style={{
+          <a href={`tel:${phone}`} style={{
             display: 'flex', alignItems: 'center', gap: 8,
             padding: '10px 18px',
             border: '1px solid var(--gold)',
@@ -99,7 +106,7 @@ export default function Navbar() {
           }}
           onMouseEnter={e => { e.currentTarget.style.background = 'var(--gold)'; e.currentTarget.style.color = 'var(--black)'; }}
           onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--gold)'; }}
-          ><Phone size={11} /> (713) 468-5665</a>
+          ><Phone size={11} /> {phoneDisplay}</a>
         </div>
 
         {/* Mobile: theme toggle + call + hamburger */}
@@ -110,7 +117,7 @@ export default function Navbar() {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'pointer',
           }}>{theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}</button>
-          <a href="tel:7134685665" style={{
+          <a href={`tel:${phone}`} style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             width: 38, height: 38,
             border: '1px solid rgba(201,169,110,0.4)',
@@ -162,7 +169,7 @@ export default function Navbar() {
           >{l.label}</a>
         ))}
 
-        <a href="tel:7134685665" onClick={() => setMenuOpen(false)} style={{
+        <a href={`tel:${phone}`} onClick={() => setMenuOpen(false)} style={{
           marginTop: 40,
           display: 'flex', alignItems: 'center', gap: 10,
           padding: '16px 32px',
@@ -172,7 +179,7 @@ export default function Navbar() {
           fontSize: '0.7rem', fontWeight: 700,
           letterSpacing: '0.15em', textTransform: 'uppercase',
           textDecoration: 'none',
-        }}><Phone size={14} /> (713) 468-5665</a>
+        }}><Phone size={14} /> {phoneDisplay}</a>
       </div>
 
       <style>{`

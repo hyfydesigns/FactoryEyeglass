@@ -1,6 +1,16 @@
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { useSanity } from '../hooks/useSanity';
+
+const BIZ_QUERY = `*[_type == "businessInfo"][0] { phone, phoneDisplay, email, address, city, turnaround }`;
 
 export default function Contact() {
+  const { data: biz } = useSanity(BIZ_QUERY);
+  const phone = biz?.phone || '7134685665';
+  const phoneDisplay = biz?.phoneDisplay || '(713) 468-5665';
+  const email = biz?.email || 'alex@factoryeyeglassoutlet.com';
+  const address = biz?.address || '7921 Katy Fwy';
+  const city = biz?.city || 'Houston, TX 77024';
+  const turnaround = biz?.turnaround || '3–5 Business Days';
   return (
     <section id="contact" style={{
       background: 'var(--off-black)',
@@ -45,10 +55,10 @@ export default function Contact() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>
               {[
-                { icon: <MapPin size={15} />, label: 'Address', value: '7921 Katy Fwy, Houston, TX 77024', href: null },
-                { icon: <Phone size={15} />, label: 'Phone', value: '(713) 468-5665', href: 'tel:7134685665' },
-                { icon: <Mail size={15} />, label: 'Email', value: 'alex@factoryeyeglassoutlet.com', href: 'mailto:alex@factoryeyeglassoutlet.com' },
-                { icon: <Clock size={15} />, label: 'Turnaround', value: '3–5 Business Days', href: null },
+                { icon: <MapPin size={15} />, label: 'Address', value: `${address}, ${city}`, href: null },
+                { icon: <Phone size={15} />, label: 'Phone', value: phoneDisplay, href: `tel:${phone}` },
+                { icon: <Mail size={15} />, label: 'Email', value: email, href: `mailto:${email}` },
+                { icon: <Clock size={15} />, label: 'Turnaround', value: turnaround, href: null },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
                   <span style={{
@@ -184,7 +194,7 @@ export default function Contact() {
             </div>
 
             <a
-              href="tel:7134685665"
+              href={`tel:${phone}`}
               style={{
                 display: 'block', width: '100%', padding: '17px',
                 background: 'var(--gold)', border: 'none',
@@ -202,7 +212,7 @@ export default function Contact() {
               fontFamily: 'Montserrat, sans-serif',
               fontSize: '0.62rem', color: 'var(--light-gray)',
               marginTop: 14,
-            }}>Or call: <a href="tel:7134685665" style={{ color: 'var(--gold)', textDecoration: 'none' }}>(713) 468-5665</a></p>
+            }}>Or call: <a href={`tel:${phone}`} style={{ color: 'var(--gold)', textDecoration: 'none' }}>{phoneDisplay}</a></p>
           </div>
         </div>
       </div>

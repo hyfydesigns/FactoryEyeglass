@@ -1,4 +1,11 @@
+import { useSanity } from '../hooks/useSanity';
+
+const ABOUT_QUERY = `*[_type == "businessInfo"][0] {
+  aboutHeadline, aboutBody1, aboutBody2, aboutQuote
+}`;
+
 export default function About() {
+  const { data: info } = useSanity(ABOUT_QUERY);
   const credentials = [
     { label: 'Experience', value: '30+ Years' },
     { label: 'Generation', value: '2nd Gen' },
@@ -49,16 +56,14 @@ export default function About() {
               fontSize: 'clamp(0.75rem, 2vw, 0.82rem)', fontWeight: 300,
               lineHeight: 1.9, color: 'var(--light-gray)', marginBottom: 20,
             }}>
-              As a second-generation optician with over 30 years of dedicated service in the greater Houston area,
-              Alexander brings unmatched expertise and a personal touch to every fitting.
+              {info?.aboutBody1 || 'As a second-generation optician with over 30 years of dedicated service in the greater Houston area, Alexander brings unmatched expertise and a personal touch to every fitting.'}
             </p>
             <p style={{
               fontFamily: 'Montserrat, sans-serif',
               fontSize: 'clamp(0.75rem, 2vw, 0.82rem)', fontWeight: 300,
               lineHeight: 1.9, color: 'var(--light-gray)', marginBottom: 32,
             }}>
-              From innovative lens technology to handcrafted frames, Alex consults on solutions
-              tailored to your lifestyle — not just your prescription.
+              {info?.aboutBody2 || 'From innovative lens technology to handcrafted frames, Alex consults on solutions tailored to your lifestyle — not just your prescription.'}
             </p>
 
             <div style={{
@@ -99,8 +104,7 @@ export default function About() {
                 fontWeight: 300, fontStyle: 'italic',
                 lineHeight: 1.5, color: 'var(--off-white)',
               }}>
-                "I don't just fit glasses — I consult on the most innovative lenses
-                to match your vision and your life."
+                {info?.aboutQuote || "I don't just fit glasses — I consult on the most innovative lenses to match your vision and your life."}
               </p>
               <p style={{
                 marginTop: 12,

@@ -1,16 +1,33 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { useSanity } from '../hooks/useSanity';
+import { urlFor } from '../sanity/client';
 
-const BG_IMAGES = [
-  'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1920&q=80',
-  'https://images.unsplash.com/photo-1556306510-31ca015374b0?auto=format&fit=crop&w=1920&q=80',
-  'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=1920&q=80',
-  'https://images.unsplash.com/photo-1517948430535-1e2469d314fe?auto=format&fit=crop&w=1920&q=80',
+const FALLBACK_IMAGES = [
+  { url: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1920&q=80', alt: 'Eyeglasses' },
+  { url: 'https://images.unsplash.com/photo-1556306510-31ca015374b0?auto=format&fit=crop&w=1920&q=80', alt: 'Black frames' },
+  { url: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=1920&q=80', alt: 'Eyewear' },
+  { url: 'https://images.unsplash.com/photo-1517948430535-1e2469d314fe?auto=format&fit=crop&w=1920&q=80', alt: 'Gold frames' },
 ];
+
+const HERO_QUERY = `{
+  "slides": *[_type == "heroSlide"] | order(order asc) { _id, image, alt },
+  "info": *[_type == "businessInfo"][0] { heroHeadline, heroSubheadline, heroTagline }
+}`;
 
 export default function Hero() {
   const lineRef = useRef(null);
   const [slide, setSlide] = useState(0);
+  const { data } = useSanity(HERO_QUERY);
+
+  const sanitySlides = data?.slides?.length
+    ? data.slides.map(s => ({ url: urlFor(s.image).width(1920).quality(80).url(), alt: s.alt || '' }))
+    : null;
+  const images = sanitySlides || FALLBACK_IMAGES;
+
+  const headline = data?.info?.heroHeadline || 'Live Life';
+  const subheadline = data?.info?.heroSubheadline || 'in the Clear';
+  const tagline = data?.info?.heroTagline || 'Over three decades of expertise. Personalized fittings, high-end designer frames, and innovative lenses tailored to your lifestyle.';
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,9 +37,9 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    const id = setInterval(() => setSlide(s => (s + 1) % BG_IMAGES.length), 5000);
+    const id = setInterval(() => setSlide(s => (s + 1) % images.length), 5000);
     return () => clearInterval(id);
-  }, []);
+  }, [images.length]);
 
   const stats = [
     { num: '30+', label: 'Years Experience' },
@@ -41,10 +58,10 @@ export default function Hero() {
       overflow: 'hidden',
     }}>
       {/* Background slideshow */}
-      {BG_IMAGES.map((src, i) => (
-        <div key={src} style={{
+      {images.map((img, i) => (
+        <div key={img.url} style={{
           position: 'absolute', inset: 0,
-          backgroundImage: `url(${src})`,
+          backgroundImage: `url(${img.url})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           opacity: slide === i ? 1 : 0,
@@ -71,7 +88,7 @@ export default function Hero() {
         position: 'absolute', bottom: 80, left: '50%', transform: 'translateX(-50%)',
         display: 'flex', gap: 8, zIndex: 3,
       }} className="slide-dots">
-        {BG_IMAGES.map((_, i) => (
+        {images.map((_, i) => (
           <button
             key={i}
             onClick={() => setSlide(i)}
@@ -112,7 +129,7 @@ export default function Hero() {
             fontWeight: 300, lineHeight: 1.0,
             color: '#F8F5F0', marginBottom: 4,
             textShadow: '0 2px 20px rgba(0,0,0,0.4)',
-          }}>Live Life</h1>
+          }}>{headline}</h1>
 
           <h1 style={{
             fontFamily: 'Cormorant Garamond, serif',
@@ -120,7 +137,7 @@ export default function Hero() {
             fontWeight: 300, fontStyle: 'italic',
             lineHeight: 1.0, color: 'var(--gold)', marginBottom: 28,
             textShadow: '0 2px 20px rgba(0,0,0,0.4)',
-          }}>in the Clear</h1>
+          }}>{subheadline}</h1>
 
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 28 }}>
             <div ref={lineRef} style={{
@@ -139,8 +156,7 @@ export default function Hero() {
             letterSpacing: '0.03em',
             textShadow: '0 1px 8px rgba(0,0,0,0.5)',
           }}>
-            Over three decades of expertise. Personalized fittings, high-end designer frames,
-            and innovative lenses tailored to your lifestyle.
+            {tagline}
           </p>
 
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>

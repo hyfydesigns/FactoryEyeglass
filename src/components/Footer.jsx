@@ -1,7 +1,15 @@
 import { Phone, Mail, MapPin } from 'lucide-react';
+import { useSanity } from '../hooks/useSanity';
+
+const BIZ_QUERY = `*[_type == "businessInfo"][0] { phone, phoneDisplay, email, address, city }`;
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { data: biz } = useSanity(BIZ_QUERY);
+  const phone = biz?.phone || '7134685665';
+  const phoneDisplay = biz?.phoneDisplay || '(713) 468-5665';
+  const email = biz?.email || 'alex@factoryeyeglassoutlet.com';
+  const address = biz?.address || '7921 Katy Fwy, Houston, TX';
 
   return (
     <footer style={{
@@ -36,9 +44,9 @@ export default function Footer() {
           }}>Houston's trusted second-generation optician. Personalized service and the finest eyewear since 1988.</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {[
-              { icon: <Phone size={11} />, text: '(713) 468-5665', href: 'tel:7134685665' },
-              { icon: <Mail size={11} />, text: 'alex@factoryeyeglassoutlet.com', href: 'mailto:alex@factoryeyeglassoutlet.com' },
-              { icon: <MapPin size={11} />, text: '7921 Katy Fwy, Houston, TX', href: null },
+              { icon: <Phone size={11} />, text: phoneDisplay, href: `tel:${phone}` },
+              { icon: <Mail size={11} />, text: email, href: `mailto:${email}` },
+              { icon: <MapPin size={11} />, text: address, href: null },
             ].map((item, i) => (
               <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
                 <span style={{ color: 'var(--gold)', marginTop: 2, flexShrink: 0 }}>{item.icon}</span>

@@ -1,6 +1,11 @@
 import { useState } from 'react';
+import { useSanity } from '../hooks/useSanity';
 
-const services = [
+const SERVICES_QUERY = `*[_type == "service"] | order(order asc) {
+  _id, number, icon, tag, title, subtitle, "desc": description, details
+}`;
+
+const FALLBACK_SERVICES = [
   {
     id: 'fitting', number: '01', icon: '◈', tag: 'Signature Service',
     title: 'Taylor Fit™ Adjustments', subtitle: 'Personalized to Your Face',
@@ -41,6 +46,8 @@ const services = [
 
 export default function Services() {
   const [active, setActive] = useState(null);
+  const { data: sanityServices } = useSanity(SERVICES_QUERY);
+  const services = sanityServices?.length ? sanityServices : FALLBACK_SERVICES;
 
   return (
     <section id="services" style={{

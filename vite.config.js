@@ -1,7 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-})
+  define: {
+    // Sanity Studio requires this
+    'process.env': {},
+  },
+  server: {
+    // Allow /studio route to fall through to index.html
+    historyApiFallback: true,
+  },
+});

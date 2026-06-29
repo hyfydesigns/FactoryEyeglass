@@ -1,7 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useSanity } from '../hooks/useSanity';
 
-const testimonials = [
+const TESTIMONIALS_QUERY = `*[_type == "testimonial"] | order(order asc) {
+  _id, name, location, rating, text
+}`;
+
+const FALLBACK_TESTIMONIALS = [
   {
     name: 'Maria G.', location: 'Houston Heights', stars: 5,
     text: 'Alex has been my optician for over 15 years. The Taylor Fit adjustment is unlike anything you get at a chain store — my glasses actually fit my face perfectly. I wouldn\'t trust anyone else.',
@@ -32,6 +37,8 @@ export default function Testimonials() {
   const [active, setActive] = useState(0);
   const [animating, setAnimating] = useState(false);
   const intervalRef = useRef(null);
+  const { data: sanityTestimonials } = useSanity(TESTIMONIALS_QUERY);
+  const testimonials = sanityTestimonials?.length ? sanityTestimonials : FALLBACK_TESTIMONIALS;
 
   const goTo = (idx) => {
     if (animating) return;
@@ -47,9 +54,9 @@ export default function Testimonials() {
   useEffect(() => {
     intervalRef.current = setInterval(() => setActive(prev => (prev + 1) % testimonials.length), 5500);
     return () => clearInterval(intervalRef.current);
-  }, []);
+  }, [testimonials.length]);
 
-  const t = testimonials[active];
+  const t = testimonials[active] || {};
 
   return (
     <section id="testimonials" style={{
@@ -99,7 +106,7 @@ export default function Testimonials() {
           ))}
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: 4, marginBottom: 24 }}>
-            {Array.from({ length: t.stars }).map((_, i) => (
+            {Array.from({ length: t.rating ?? t.stars ?? 5 }).map((_, i) => (
               <Star key={i} size={13} fill="var(--gold)" color="var(--gold)" />
             ))}
           </div>

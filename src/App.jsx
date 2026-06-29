@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Phone } from 'lucide-react';
 import './index.css';
+import { useSanity } from './hooks/useSanity';
+
+const BIZ_QUERY = `*[_type == "businessInfo"][0] { phone }`;
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -40,6 +43,9 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const { data: biz } = useSanity(BIZ_QUERY);
+  const phone = biz?.phone || '7134685665';
+
   return (
     <>
       <Navbar />
@@ -56,7 +62,7 @@ export default function App() {
       <Footer />
       <ScrollToTop />
       {/* Floating call button — mobile only */}
-      <a href="tel:7134685665" className="mobile-call-fab" aria-label="Call us">
+      <a href={`tel:${phone}`} className="mobile-call-fab" aria-label="Call us">
         <Phone size={22} />
       </a>
     </>

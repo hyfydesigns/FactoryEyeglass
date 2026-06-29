@@ -23,7 +23,7 @@ export default function Navbar() {
 
   const { data: biz } = useSanity(BIZ_QUERY);
   const phone = biz?.phone || '7134685665';
-  const phoneDisplay = biz?.phoneDisplay || '{phoneDisplay}';
+  const phoneDisplay = biz?.phoneDisplay || '(713) 468-5665';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);

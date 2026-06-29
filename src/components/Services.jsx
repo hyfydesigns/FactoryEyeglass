@@ -76,7 +76,7 @@ export default function Services() {
         }}>
           {services.map((s) => (
             <div
-              key={s.id}
+              key={s._id || s.id}
               style={{
                 background: active === s.id ? 'rgba(201,169,110,0.06)' : 'var(--black)',
                 padding: 'clamp(24px, 4vw, 44px) clamp(20px, 3vw, 36px)',
